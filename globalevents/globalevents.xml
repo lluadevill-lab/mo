@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<globalevents>
+<globalevent name="CheckAI" interval="1000" script="check_ai_response.lua" />
+<globalevent name="MobaScoreboardUpdate" interval="1000" script="moba_scoreboard_update.lua"/>
+
+<globalevent name="RegenAreas" interval="500" script="moba_base.lua"/>
+<globalevent name="MobaWaves" interval="1000" script="moba_waves.lua"/>
+<globalevent name="MobaSkullKeeper" interval="1000" script="moba_skull_keeper.lua"/>
+
+	<!-- Rent Horses -->
+	<globalevent name="RentedMounts" interval="15000" script="others/checkMount.lua" />
+
+	<!-- Others --> 
+	<globalevent type="startup" name="ServerStartup" script="startup.lua" />
+	<globalevent type="record" name="PlayerRecord" script="record.lua" />
+	<globalevent name="ServerSave" time="05:55:00" script="serversave.lua" />	
+	<globalevent type="startup" name="rashid" script="rashid.lua"/>
+	
+<!-- raid -->
+        <globalevent name="text" interval="4550" script="textotp.lua"/>
+	<globalevent type="startup" name="doCheckHouses" script="others/doCheckHouses.lua" />
+	<globalevent name="checkInbox" interval="30000" script="others/checkInbox.lua"/>
+	<globalevent interval="100000" name="GuildWar" script="guildwar.lua"/>
+	<globalevent interval="1800000" name="AutoSave" script="autosave.lua"/>
+	<globalevent name="autoBroadcast" interval="900000" script="autobroadcast.lua"/>
+</globalevents>
