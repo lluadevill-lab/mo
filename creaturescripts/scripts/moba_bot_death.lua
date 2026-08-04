@@ -59,8 +59,13 @@ function onPrepareDeath(creature, killer)
     local savedExp = oldData.exp
     local savedGold = oldData.gold
     local savedSkill = oldData.skill
+    local savedUid = oldData.uniqueId
+    local savedLane = oldData.assignedLane
 
     -- AGORA PODE LIMPAR
+    if MOBA_BOTS.cleanupDebuffs then
+        MOBA_BOTS.cleanupDebuffs(cid)
+    end
     MOBA_BOTS.Data[cid] = nil
     if MOBA.MinionState then MOBA.MinionState[cid] = nil end
 
@@ -69,7 +74,7 @@ function onPrepareDeath(creature, killer)
     addEvent(function()
         if MOBA.matchActive then
             print(">> [BOT RESPAWN] " .. classDisplay .. " Time " .. teamId)
-            MOBA_BOTS.respawnClone(teamId, className, savedLevel, savedExp, savedGold, savedSkill)
+            MOBA_BOTS.respawnClone(teamId, className, savedLevel, savedExp, savedGold, savedSkill, savedUid, savedLane)
         end
     end, 5000)
 

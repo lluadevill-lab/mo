@@ -24,6 +24,14 @@ function onDeath(creature, corpse, lasthitkiller, mostdamagekiller, lasthitunjus
         -- Efeito visual na morte do nexus
         creature:getPosition():sendMagicEffect(CONST_ME_FIREAREA)
         
+        -- Marca o nexus como destruído (usado pelo auto-aprendizado / placar)
+        if MOBA.Objectives and MOBA.Objectives[loserTeamId] then
+            MOBA.Objectives[loserTeamId].nexus = false
+        end
+        if MOBA_BOTS and MOBA_BOTS.addScore then
+            MOBA_BOTS.addScore(winnerTeamId, "nexusDestroyed", 1)
+        end
+        
         -- Posição do Lobby
         local lobbyPos = Position(1421, 1071, 7)
 

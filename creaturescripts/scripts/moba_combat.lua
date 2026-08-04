@@ -1,10 +1,10 @@
 if not MOBA.FatalKillers then MOBA.FatalKillers = {} end
 
 function onHealthChange(creature, attacker, primaryDamage, primaryType, secondaryDamage, secondaryType, origin)
-    
+    local totalDmg = (primaryDamage or 0) + (secondaryDamage or 0)
+
     -- SISTEMA DE DETECÇÃO DE DANO (CRUCIAL PARA A IA)
     if creature:isMonster() and MOBA_BOTS and MOBA_BOTS.Data[creature:getId()] then
-        local totalDmg = primaryDamage + secondaryDamage
         if totalDmg > 0 and attacker then
             local name = attacker:getName():lower()
             
@@ -19,6 +19,23 @@ function onHealthChange(creature, attacker, primaryDamage, primaryType, secondar
             -- 3. Dano de Minion
             else
                 MOBA_BOTS.registerDamage(creature:getId(), "minion", totalDmg)
+            end
+        end
+    end
+
+    -- TRACKING DE DANO NO BOT (reação: fuga, recall, tower aggro)
+    -- IMPORTANTE: o evento MobaHealthChange está mapeado para este script no XML,
+    -- então é aqui que atualizamos lastDamageTime dos bots (isUnderAttack etc.)
+    if creature:isMonster() and MOBA_BOTS and MOBA_BOTS.handleBotDamage and totalDmg > 0 then
+        local cid = creature:getId()
+        if MOBA_BOTS.Data[cid] then
+            MOBA_BOTS.handleBotDamage(cid, attacker, totalDmg)
+        elseif MOBA.MinionState and MOBA.MinionState[cid] then
+            -- Estruturas (torres/núcleo) memorizam quem as atacou (aggro)
+            local st = MOBA.MinionState[cid]
+            if st.isStructure and attacker then
+                st.lastAttacker = attacker:getId()
+                st.lastAttackerTime = os.clock()
             end
         end
     end

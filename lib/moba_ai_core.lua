@@ -243,18 +243,20 @@ local function executeAttack(cid, targetId, state)
         MOBA.FatalKillers[targetCid] = 0
     end
 
+    -- CORREÇÃO: aplicar dano apenas UMA vez.
+    -- doTargetCombatHealth já aplica o dano e dispara o evento onHealthChange
+    -- (necessário para tracking de dano e proteção contra teamkill).
+    -- O antigo código também chamava target:addHealth(-dmg), dobrando o dano.
     if target:getHealth() > 0 then
-        target:addHealth(-dmg)
+        doTargetCombatHealth(
+            cid,
+            target,
+            COMBAT_PHYSICALDAMAGE,
+            -dmg,
+            -dmg,
+            CONST_ME_NONE
+        )
     end
-
-    doTargetCombatHealth(
-        cid,
-        target,
-        COMBAT_PHYSICALDAMAGE,
-        -dmg,
-        -dmg,
-        CONST_ME_NONE
-    )
 end
 
 -- ============================================================
@@ -293,6 +295,21 @@ function MobaMinionLogic(cid)
     local target = nil
     local bestDist = 999
     local scanRange = state.isStructure and 9 or 8
+
+    -- Torre com aggro: prioriza quem a atacou por último (comportamento de MOBA real)
+    if state.isStructure and state.lastAttacker then
+        local aggroAge = (os.clock() - (state.lastAttackerTime or 0))
+        if aggroAge >= 0 and aggroAge <= 4.0 then
+            local aggroCreature = Creature(state.lastAttacker)
+            if aggroCreature and aggroCreature:getHealth() > 0 and isEnemy(cid, state.lastAttacker) then
+                local d = getDistance(myPos, aggroCreature:getPosition())
+                if d <= scanRange then
+                    target = aggroCreature
+                    bestDist = d
+                end
+            end
+        end
+    end
 
     local specs = Game.getSpectators(myPos, false, false, scanRange, scanRange, scanRange, scanRange)
     for _, spec in ipairs(specs) do

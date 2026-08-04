@@ -72,8 +72,8 @@ MOBA_BOTS.CONFIG = {
     THINK_INTERVAL = 300,
     THINK_INTERVAL_COMBAT = 300,
     THINK_INTERVAL_CRITICAL = 300,
-    ATTACK_CD = 2.0,
-    SPELL_CD_GLOBAL = 1,0,
+    ATTACK_CD = 1.6,
+    SPELL_CD_GLOBAL = 1.0,
     POTION_CD = 3.0,
     HEAL_ALLY_CD = 3.0,
     
@@ -248,17 +248,18 @@ MOBA_BOTS.EXP_TABLE = {
 MOBA_BOTS.CLASSES = {
     knight = {
         name = "Knight",
-        hp = 650,
-        hpGain = 85,
-        mana = 100,
-        manaGain = 10,
-        atk = 38,
-        atkGain = 3.2,
+        hp = 720,
+        hpGain = 88,
+        mana = 120,
+        manaGain = 12,
+        atk = 40,
+        atkGain = 3.4,
         def = 15,
         defGain = 2,
         speed = 280,
         range = 1,
         ranged = false,
+        atkSpeed = 1.4,
         distEffect = CONST_ANI_NONE,
         hitEffect = CONST_ME_HITAREA,
         vocId = 4,
@@ -277,7 +278,7 @@ MOBA_BOTS.CLASSES = {
                 cd = 5.0,
                 type = "absolute",
                 pattern = "adjacent",
-                damage = {min = 40, max = 65},
+                damage = {min = 45, max = 70},
                 effect = CONST_ME_HITAREA,
                 areaEffect = true,
                 priority = 1
@@ -290,7 +291,7 @@ MOBA_BOTS.CLASSES = {
                 cd = 15.0,
                 type = "absolute",
                 pattern = "adjacent",
-                damage = {min = 90, max = 140},
+                damage = {min = 95, max = 150},
                 effect = CONST_ME_HITAREA,
                 areaEffect = true,
                 priority = 2
@@ -303,7 +304,7 @@ MOBA_BOTS.CLASSES = {
                 cd = 10.0,
                 type = "absolute",
                 pattern = "small_area",
-                damage = {min = 70, max = 100},
+                damage = {min = 75, max = 105},
                 effect = CONST_ME_GROUNDSHAKER,
                 areaEffect = true,
                 radius = 3,
@@ -318,7 +319,7 @@ MOBA_BOTS.CLASSES = {
                 type = "buff",
                 duration = 10,
                 effect = CONST_ME_MAGIC_GREEN,
-                bonuses = {bonusAtk = 35, bonusSpeed = 20},
+                bonuses = {bonusAtk = 35, bonusSpeed = 30},
                 priority = 4
             },
             {
@@ -329,9 +330,36 @@ MOBA_BOTS.CLASSES = {
                 cd = 5.0,
                 type = "targeted",
                 range = 1,
-                damage = {min = 25, max = 40},
+                damage = {min = 28, max = 45},
                 effect = CONST_ME_HITAREA,
                 priority = 0
+            },
+            {
+                name = "exeta res",
+                words = "exeta res",
+                level = 12,
+                mana = 30,
+                cd = 10.0,
+                type = "taunt",
+                radius = 4,
+                duration = 4,
+                effect = CONST_ME_MAGIC_RED,
+                priority = 4
+            },
+            {
+                name = "exori gran mas",
+                words = "exori gran mas",
+                level = 35,
+                mana = 120,
+                cd = 30.0,
+                type = "absolute",
+                pattern = "small_area",
+                damage = {min = 160, max = 240},
+                effect = CONST_ME_GROUNDSHAKER,
+                areaEffect = true,
+                radius = 3,
+                priority = 5,
+                ultimate = true
             }
         },
         potionType = "health",
@@ -340,17 +368,18 @@ MOBA_BOTS.CLASSES = {
     
     paladin = {
         name = "Paladin",
-        hp = 480,
-        hpGain = 55,
-        mana = 150,
-        manaGain = 15,
-        atk = 32,
-        atkGain = 2.8,
+        hp = 520,
+        hpGain = 58,
+        mana = 160,
+        manaGain = 16,
+        atk = 34,
+        atkGain = 3.0,
         def = 10,
         defGain = 1.5,
         speed = 300,
         range = 5,
         ranged = true,
+        atkSpeed = 1.8,
         distEffect = CONST_ANI_BOLT,
         hitEffect = CONST_ME_DRAWBLOOD,
         vocId = 3,
@@ -369,7 +398,7 @@ MOBA_BOTS.CLASSES = {
                 cd = 3.0,
                 type = "targeted",
                 range = 4,
-                damage = {min = 30, max = 50},
+                damage = {min = 32, max = 52},
                 distEffect = CONST_ANI_HOLY,
                 effect = CONST_ME_HOLYDAMAGE,
                 priority = 1
@@ -382,25 +411,34 @@ MOBA_BOTS.CLASSES = {
                 cd = 4.0,
                 type = "targeted",
                 range = 6,
-                damage = {min = 40, max = 65},
+                damage = {min = 42, max = 68},
                 distEffect = CONST_ANI_BOLT,
                 effect = CONST_ME_DRAWBLOOD,
                 priority = 2
             },
             {
-                name = "exevo mas san",
-                words = "exevo mas san",
-                level = 25,
-                mana = 100,
-                cd = 12.0,
-                type = "absolute",
-                pattern = "small_area",
-                damage = {min = 80, max = 130},
-                effect = CONST_ME_HOLYDAMAGE,
-                radius = 3,
-                priority = 3
+                name = "exura san",
+                words = "exura san",
+                level = 10,
+                mana = 30,
+                cd = 6.0,
+                type = "heal_self",
+                heal = {min = 60, max = 100},
+                effect = CONST_ME_MAGIC_BLUE,
+                priority = 6
             },
-            
+            {
+                name = "utani hur",
+                words = "utani hur",
+                level = 15,
+                mana = 40,
+                cd = 20.0,
+                type = "buff",
+                duration = 8,
+                effect = CONST_ME_MAGIC_GREEN,
+                bonuses = {bonusSpeed = 30},
+                priority = 4
+            },
             {
                 name = "utito tempo san",
                 words = "utito tempo san",
@@ -410,8 +448,35 @@ MOBA_BOTS.CLASSES = {
                 type = "buff",
                 duration = 10,
                 effect = CONST_ME_MAGIC_GREEN,
-                bonuses = {bonusAtk = 25, bonusDist = 15},
+                bonuses = {bonusAtk = 25, bonusDist = 2},
                 priority = 4
+            },
+            {
+                name = "exevo mas san",
+                words = "exevo mas san",
+                level = 25,
+                mana = 100,
+                cd = 12.0,
+                type = "absolute",
+                pattern = "small_area",
+                damage = {min = 85, max = 135},
+                effect = CONST_ME_HOLYDAMAGE,
+                radius = 3,
+                priority = 3
+            },
+            {
+                name = "exevo gran mas san",
+                words = "exevo gran mas san",
+                level = 35,
+                mana = 130,
+                cd = 30.0,
+                type = "absolute",
+                pattern = "medium_area",
+                damage = {min = 140, max = 220},
+                effect = CONST_ME_HOLYDAMAGE,
+                radius = 4,
+                priority = 5,
+                ultimate = true
             }
         },
         potionType = "health",
@@ -420,17 +485,18 @@ MOBA_BOTS.CLASSES = {
     
     sorcerer = {
         name = "Sorcerer",
-        hp = 380,
-        hpGain = 38,
-        mana = 250,
-        manaGain = 30,
-        atk = 28,
-        atkGain = 2.2,
+        hp = 400,
+        hpGain = 40,
+        mana = 280,
+        manaGain = 34,
+        atk = 30,
+        atkGain = 2.4,
         def = 5,
         defGain = 1,
         speed = 290,
         range = 4,
         ranged = true,
+        atkSpeed = 1.9,
         distEffect = CONST_ANI_ENERGY,
         hitEffect = CONST_ME_ENERGYHIT,
         vocId = 1,
@@ -449,7 +515,7 @@ MOBA_BOTS.CLASSES = {
                 cd = 3.0,
                 type = "targeted",
                 range = 3,
-                damage = {min = 35, max = 55},
+                damage = {min = 38, max = 58},
                 distEffect = CONST_ANI_ENERGY,
                 effect = CONST_ME_ENERGYHIT,
                 priority = 1
@@ -462,10 +528,22 @@ MOBA_BOTS.CLASSES = {
                 cd = 3.0,
                 type = "targeted",
                 range = 3,
-                damage = {min = 40, max = 65},
+                damage = {min = 42, max = 68},
                 distEffect = CONST_ANI_FIRE,
                 effect = CONST_ME_FIREATTACK,
                 priority = 1
+            },
+            {
+                name = "utani tempo hur",
+                words = "utani tempo hur",
+                level = 14,
+                mana = 45,
+                cd = 20.0,
+                type = "buff",
+                duration = 8,
+                effect = CONST_ME_MAGIC_GREEN,
+                bonuses = {bonusSpeed = 30},
+                priority = 4
             },
             {
                 name = "exori mort",
@@ -475,7 +553,7 @@ MOBA_BOTS.CLASSES = {
                 cd = 3.0,
                 type = "targeted",
                 range = 3,
-                damage = {min = 50, max = 80},
+                damage = {min = 52, max = 84},
                 distEffect = CONST_ANI_DEATH,
                 effect = CONST_ME_MORTAREA,
                 priority = 1
@@ -490,7 +568,7 @@ MOBA_BOTS.CLASSES = {
                 direction = true,
                 length = 5,
                 width = 3,
-                damage = {min = 70, max = 110},
+                damage = {min = 75, max = 115},
                 effect = CONST_ME_ENERGYAREA,
                 priority = 2
             },
@@ -504,9 +582,22 @@ MOBA_BOTS.CLASSES = {
                 direction = true,
                 length = 6,
                 width = 4,
-                damage = {min = 80, max = 130},
+                damage = {min = 85, max = 135},
                 effect = CONST_ME_FIREAREA,
                 priority = 2
+            },
+            {
+                name = "exori gran vis",
+                words = "exori gran vis",
+                level = 22,
+                mana = 40,
+                cd = 7.0,
+                type = "targeted",
+                range = 4,
+                damage = {min = 95, max = 140},
+                distEffect = CONST_ANI_ENERGY,
+                effect = CONST_ME_ENERGYHIT,
+                priority = 3
             },
             {
                 name = "exevo gran vis hur",
@@ -518,22 +609,9 @@ MOBA_BOTS.CLASSES = {
                 direction = true,
                 length = 7,
                 width = 5,
-                damage = {min = 120, max = 180},
+                damage = {min = 125, max = 185},
                 effect = CONST_ME_BIGCLOUDS,
                 priority = 3
-            },
-            {
-                name = "exevo gran mas vis",
-                words = "exevo gran mas vis",
-                level = 35,
-                mana = 150,
-                cd = 20.0,
-                type = "absolute",
-                pattern = "large_area",
-                damage = {min = 180, max = 280},
-                effect = CONST_ME_ENERGYAREA,
-                radius = 5,
-                priority = 4
             },
             {
                 name = "utori vis",
@@ -545,8 +623,22 @@ MOBA_BOTS.CLASSES = {
                 range = 4,
                 duration = 6,
                 effect = CONST_ME_ENERGYHIT,
-                bonuses = {slow = 20},
+                bonuses = {slow = 25},
                 priority = 3
+            },
+            {
+                name = "exevo gran mas vis",
+                words = "exevo gran mas vis",
+                level = 35,
+                mana = 150,
+                cd = 20.0,
+                type = "absolute",
+                pattern = "large_area",
+                damage = {min = 190, max = 290},
+                effect = CONST_ME_ENERGYAREA,
+                radius = 5,
+                priority = 5,
+                ultimate = true
             }
         },
         potionType = "mana",
@@ -555,17 +647,18 @@ MOBA_BOTS.CLASSES = {
     
     druid = {
         name = "Druid",
-        hp = 400,
-        hpGain = 42,
-        mana = 280,
-        manaGain = 35,
-        atk = 24,
-        atkGain = 2.0,
+        hp = 430,
+        hpGain = 44,
+        mana = 300,
+        manaGain = 38,
+        atk = 26,
+        atkGain = 2.2,
         def = 6,
         defGain = 1.2,
         speed = 285,
         range = 4,
         ranged = true,
+        atkSpeed = 1.9,
         distEffect = CONST_ANI_ICE,
         hitEffect = CONST_ME_ICEATTACK,
         vocId = 2,
@@ -584,7 +677,7 @@ MOBA_BOTS.CLASSES = {
                 cd = 3.0,
                 type = "targeted",
                 range = 3,
-                damage = {min = 30, max = 50},
+                damage = {min = 32, max = 52},
                 distEffect = CONST_ANI_ICE,
                 effect = CONST_ME_ICEATTACK,
                 priority = 1
@@ -597,10 +690,22 @@ MOBA_BOTS.CLASSES = {
                 cd = 3.0,
                 type = "targeted",
                 range = 3,
-                damage = {min = 35, max = 55},
+                damage = {min = 38, max = 58},
                 distEffect = CONST_ANI_EARTH,
                 effect = CONST_ME_CARNIPHILA,
                 priority = 1
+            },
+            {
+                name = "utani tempo hur",
+                words = "utani tempo hur",
+                level = 14,
+                mana = 40,
+                cd = 20.0,
+                type = "buff",
+                duration = 8,
+                effect = CONST_ME_MAGIC_GREEN,
+                bonuses = {bonusSpeed = 30},
+                priority = 4
             },
             {
                 name = "exevo frigo hur",
@@ -612,8 +717,22 @@ MOBA_BOTS.CLASSES = {
                 direction = true,
                 length = 5,
                 width = 3,
-                damage = {min = 60, max = 100},
+                damage = {min = 62, max = 102},
                 effect = CONST_ME_ICEAREA,
+                priority = 2
+            },
+            {
+                name = "exevo tera hur",
+                words = "exevo tera hur",
+                level = 18,
+                mana = 50,
+                cd = 8.5,
+                type = "wave",
+                direction = true,
+                length = 5,
+                width = 3,
+                damage = {min = 72, max = 112},
+                effect = CONST_ME_STONES,
                 priority = 2
             },
             {
@@ -626,23 +745,9 @@ MOBA_BOTS.CLASSES = {
                 direction = true,
                 length = 6,
                 width = 4,
-                damage = {min = 90, max = 140},
+                damage = {min = 95, max = 145},
                 effect = CONST_ME_ICETORNADO,
                 priority = 3
-            },
-            {
-                name = "exevo tera hur",
-                words = "exevo tera hur",
-                level = 18,
-                mana = 50,
-                cd = 8.5,
-                type = "wave",
-                direction = true,
-                length = 5,
-                width = 3,
-                damage = {min = 70, max = 110},
-                effect = CONST_ME_STONES,
-                priority = 2
             },
             {
                 name = "exevo gran mas frigo",
@@ -652,10 +757,24 @@ MOBA_BOTS.CLASSES = {
                 cd = 20.0,
                 type = "absolute",
                 pattern = "medium_area",
-                damage = {min = 120, max = 200},
+                damage = {min = 125, max = 205},
                 effect = CONST_ME_ICETORNADO,
                 radius = 4,
                 priority = 4
+            },
+            {
+                name = "exevo gran mas tera",
+                words = "exevo gran mas tera",
+                level = 35,
+                mana = 130,
+                cd = 30.0,
+                type = "absolute",
+                pattern = "large_area",
+                damage = {min = 135, max = 215},
+                effect = CONST_ME_STONES,
+                radius = 5,
+                priority = 5,
+                ultimate = true
             },
             {
                 name = "exura",
@@ -666,7 +785,7 @@ MOBA_BOTS.CLASSES = {
                 type = "heal_self",
                 heal = {min = 50, max = 80},
                 effect = CONST_ME_MAGIC_BLUE,
-                priority = 5
+                priority = 6
             },
             {
                 name = "exura gran",
@@ -677,7 +796,7 @@ MOBA_BOTS.CLASSES = {
                 type = "heal_self",
                 heal = {min = 100, max = 160},
                 effect = CONST_ME_MAGIC_BLUE,
-                priority = 5
+                priority = 6
             },
             {
                 name = "exura sio",
@@ -689,7 +808,7 @@ MOBA_BOTS.CLASSES = {
                 range = 7,
                 heal = {min = 120, max = 200},
                 effect = CONST_ME_MAGIC_BLUE,
-                priority = 6
+                priority = 7
             },
             {
                 name = "exura gran sio",
@@ -701,7 +820,7 @@ MOBA_BOTS.CLASSES = {
                 range = 7,
                 heal = {min = 200, max = 320},
                 effect = CONST_ME_MAGIC_BLUE,
-                priority = 6
+                priority = 7
             },
             {
                 name = "exura gran mas res",
@@ -713,7 +832,7 @@ MOBA_BOTS.CLASSES = {
                 radius = 4,
                 heal = {min = 150, max = 250},
                 effect = CONST_ME_MAGIC_BLUE,
-                priority = 7
+                priority = 8
             }
         },
         potionType = "mana",
@@ -1025,6 +1144,15 @@ MOBA_BOTS.DamageTracker = {}
 MOBA_BOTS.TeamFocus = {[1] = nil, [2] = nil}
 MOBA_BOTS.LastTeamFocusTime = {[1] = 0, [2] = 0}
 
+-- Debuffs ativos por criatura (lentidão etc.)
+MOBA_BOTS.Debuffs = {}
+
+-- Estado das torres para o scoreboard (espelha MOBA.Objectives)
+MOBA_BOTS.TowerState = {
+    [1] = {top = {true, true, true}, mid = {true, true, true}, bot = {true, true, true}},
+    [2] = {top = {true, true, true}, mid = {true, true, true}, bot = {true, true, true}}
+}
+
 MOBA_BOTS.TeamScores = {
     [1] = {kills = 0, deaths = 0, assists = 0, towersDestroyed = 0, totalGold = 0, totalExp = 0, minionsKilled = 0, nexusDestroyed = false},
     [2] = {kills = 0, deaths = 0, assists = 0, towersDestroyed = 0, totalGold = 0, totalExp = 0, minionsKilled = 0, nexusDestroyed = false}
@@ -1033,6 +1161,382 @@ MOBA_BOTS.TeamScores = {
 MOBA_BOTS.PlayerStats = {}
 MOBA_BOTS.MatchStartTime = 0
 MOBA_BOTS.WaveCount = {[1] = 0, [2] = 0}
+
+-- ==========================================================
+-- SISTEMA DE AUTO-APRENDIZADO (ADAPTATIVO)
+-- Os bots registram o resultado das partidas por classe e
+-- ajustam dificuldade com base no histórico (winrate).
+-- Também aplica "rubber band" (pega-traso): o time perdedor
+-- ganha mais ouro/xp, como em MOBAs de verdade.
+-- ==========================================================
+
+MOBA_BOTS.Learning = {
+    enabled = true,
+    filePath = "data/moba_learning.json",
+    data = nil,
+    loaded = false
+}
+
+function MOBA_BOTS.Learning:defaultData()
+    local classes = {}
+    for _, cls in ipairs({"knight", "paladin", "sorcerer", "druid"}) do
+        classes[cls] = {wins = 0, losses = 0, kills = 0, deaths = 0, goldEarned = 0}
+    end
+    return {
+        matches = 0,
+        classes = classes,
+        teams = {[1] = {wins = 0, losses = 0}, [2] = {wins = 0, losses = 0}}
+    }
+end
+
+function MOBA_BOTS.Learning:load()
+    if self.loaded then return true end
+    self.data = self:defaultData()
+    local ok, f = pcall(io.open, self.filePath, "r")
+    if ok and f then
+        local content = f:read("*a")
+        f:close()
+        if content and content ~= "" then
+            local ok2, decoded = pcall(json.decode, content)
+            if ok2 and decoded and decoded.matches then
+                self.data = decoded
+            end
+        end
+    end
+    self.loaded = true
+    return true
+end
+
+function MOBA_BOTS.Learning:save()
+    if not self.data then return end
+    local ok, f = pcall(io.open, self.filePath, "w")
+    if ok and f then
+        local ok2, encoded = pcall(json.encode, self.data)
+        if ok2 then f:write(encoded) end
+        f:close()
+    end
+end
+
+function MOBA_BOTS.Learning:getClassData(className)
+    self:load()
+    if not self.data.classes[className] then
+        self.data.classes[className] = {wins = 0, losses = 0, kills = 0, deaths = 0, goldEarned = 0}
+    end
+    return self.data.classes[className]
+end
+
+-- Registra o resultado de uma partida. comp1/comp2 = tabela classe -> qtd de bots.
+function MOBA_BOTS.Learning:recordMatch(winnerTeamId, duration, comp1, comp2)
+    if not self.enabled then return end
+    self:load()
+    self.data.matches = (self.data.matches or 0) + 1
+
+    for teamId = 1, 2 do
+        local won = (teamId == winnerTeamId)
+        local td = self.data.teams[teamId] or {wins = 0, losses = 0}
+        if won then td.wins = (td.wins or 0) + 1 else td.losses = (td.losses or 0) + 1 end
+        self.data.teams[teamId] = td
+
+        local comp = teamId == 1 and comp1 or comp2
+        if comp then
+            for className, count in pairs(comp) do
+                if count and count > 0 then
+                    local cd = self:getClassData(className)
+                    if won then
+                        cd.wins = (cd.wins or 0) + count
+                    else
+                        cd.losses = (cd.losses or 0) + count
+                    end
+                end
+            end
+        end
+    end
+
+    self:save()
+    if MOBA_BOTS.CONFIG and MOBA_BOTS.CONFIG.DEBUG_ENABLED then
+        print("[LEARNING] Partida #" .. tostring(self.data.matches) .. " registrada | Vencedor: time " .. tostring(winnerTeamId) .. " (" .. tostring(duration or 0) .. "s)")
+    end
+end
+
+-- Ajustes por classe baseados no winrate histórico.
+function MOBA_BOTS.Learning:getAdjustments(className)
+    self:load()
+    local cd = self:getClassData(className)
+    local games = (cd.wins or 0) + (cd.losses or 0)
+    local adj = {dmgMult = 1.0, hpMult = 1.0, aggression = 0.0}
+
+    if games < 3 then return adj end -- amostra mínima
+
+    local winRate = (cd.wins or 0) / games
+    local delta = winRate - 0.5
+
+    adj.dmgMult = 1.0 - (delta * 0.30)
+    adj.hpMult  = 1.0 - (delta * 0.20)
+    adj.aggression = -delta * 0.15
+
+    adj.dmgMult = math.max(0.85, math.min(1.15, adj.dmgMult))
+    adj.hpMult  = math.max(0.90, math.min(1.10, adj.hpMult))
+    adj.aggression = math.max(-0.20, math.min(0.20, adj.aggression))
+
+    return adj
+end
+
+function MOBA_BOTS.Learning:applyToBot(data)
+    if not data then return end
+    local adj = self:getAdjustments(data.class)
+    data.learnDmgMult = adj.dmgMult
+    data.learnHpMult = adj.hpMult
+    data.learnAggression = adj.aggression
+end
+
+-- Rubber band: quanto mais atrás o time está, mais ouro/xp ganha.
+function MOBA_BOTS.Learning:getCatchupMultiplier(teamId)
+    if not self.enabled then return 1.0 end
+    local s1 = MOBA_BOTS.TeamScores[1] or {}
+    local s2 = MOBA_BOTS.TeamScores[2] or {}
+
+    local function power(s)
+        return (s.kills or 0) + (s.towersDestroyed or 0) * 3 + (s.totalGold or 0) / 500
+    end
+
+    local diff = power(s1) - power(s2)
+    local mult = 1.0
+    if teamId == 1 then
+        mult = 1.0 - diff * 0.015
+    else
+        mult = 1.0 + diff * 0.015
+    end
+    return math.max(0.80, math.min(1.40, mult))
+end
+
+function MOBA_BOTS.Learning:status()
+    self:load()
+    print("=== MOBA LEARNING ===")
+    print("Partidas registradas: " .. tostring(self.data.matches or 0))
+    for className, cd in pairs(self.data.classes or {}) do
+        local games = (cd.wins or 0) + (cd.losses or 0)
+        local wr = games > 0 and string.format("%.0f%%", (cd.wins or 0) / games * 100) or "-"
+        local adj = self:getAdjustments(className)
+        print(string.format("  %s: %dV/%dD (%s) | dmg x%.2f hp x%.2f agg %+.2f",
+            className, cd.wins or 0, cd.losses or 0, wr,
+            adj.dmgMult, adj.hpMult, adj.aggression))
+    end
+    for teamId = 1, 2 do
+        local td = (self.data.teams or {})[teamId] or {wins = 0, losses = 0}
+        print(string.format("  Time %d: %dV/%dD", teamId, td.wins or 0, td.losses or 0))
+    end
+    print("======================")
+end
+
+-- ==========================================================
+-- ESTADO DE TORRES (Scoreboard) + FUNÇÕES FALTANTES
+-- ==========================================================
+
+function MOBA_BOTS.syncTowerState()
+    for teamId = 1, 2 do
+        if not MOBA_BOTS.TowerState[teamId] then
+            MOBA_BOTS.TowerState[teamId] = {top = {}, mid = {}, bot = {}}
+        end
+        local obj = MOBA and MOBA.Objectives and MOBA.Objectives[teamId]
+        for _, lane in ipairs({"top", "mid", "bot"}) do
+            local laneState = MOBA_BOTS.TowerState[teamId][lane] or {}
+            if obj and obj.towers and obj.towers[lane] then
+                for i = 1, 3 do
+                    laneState[i] = obj.towers[lane][i] ~= false
+                end
+            end
+            MOBA_BOTS.TowerState[teamId][lane] = laneState
+        end
+    end
+end
+
+function MOBA_BOTS.onTowerDestroyed(teamId, lane, towerIndex)
+    if not teamId or not lane or not towerIndex then return end
+    if not MOBA_BOTS.TowerState[teamId] then
+        MOBA_BOTS.TowerState[teamId] = {top = {}, mid = {}, bot = {}}
+    end
+    if not MOBA_BOTS.TowerState[teamId][lane] then
+        MOBA_BOTS.TowerState[teamId][lane] = {}
+    end
+    MOBA_BOTS.TowerState[teamId][lane][towerIndex] = false
+end
+
+function MOBA_BOTS.initPlayerStats(player)
+    if not player then return end
+    local pid = player:getId()
+    if not MOBA_BOTS.PlayerStats[pid] then
+        MOBA_BOTS.PlayerStats[pid] = {
+            name = player:getName(),
+            isBot = false,
+            vocation = player:getVocation() and player:getVocation():getName() or "Unknown",
+            kills = 0, deaths = 0, assists = 0,
+            gold = 0, exp = 0, damage = 0, healing = 0,
+            teamId = player:getStorageValue(MOBA and MOBA.STORAGE_TEAM or 50020)
+        }
+    end
+end
+
+function MOBA_BOTS.getTeamPlayers(teamId)
+    local entries = {}
+
+    -- Jogadores do time
+    for _, p in ipairs(Game.getPlayers()) do
+        local pTeam = p:getStorageValue(MOBA and MOBA.STORAGE_TEAM or 50020)
+        if pTeam == teamId then
+            local stats = MOBA_BOTS.PlayerStats[p:getId()]
+            table.insert(entries, {
+                name = p:getName(),
+                isBot = false,
+                vocation = p:getVocation() and p:getVocation():getName() or "Unknown",
+                kills = stats and (stats.kills or 0) or 0,
+                deaths = stats and (stats.deaths or 0) or 0,
+                gold = stats and (stats.gold or 0) or 0,
+                level = p:getLevel()
+            })
+        end
+    end
+
+    -- Bots do time
+    for cid, d in pairs(MOBA_BOTS.Data or {}) do
+        if d.teamId == teamId then
+            local c = Creature(cid)
+            if c and c:getHealth() > 0 then
+                table.insert(entries, {
+                    name = (MOBA_BOTS.CLASSES[d.class] and MOBA_BOTS.CLASSES[d.class].name) or d.class,
+                    isBot = true,
+                    vocation = d.class,
+                    kills = d.kills or 0,
+                    deaths = d.deaths or 0,
+                    gold = d.gold or 0,
+                    level = d.level or 1
+                })
+            end
+        end
+    end
+
+    return entries
+end
+
+-- Tracking de dano compartilhado (usado por moba_combat.lua e onBotHealthChange)
+function MOBA_BOTS.handleBotDamage(cid, attacker, totalDamage)
+    local data = MOBA_BOTS.Data[cid]
+    if not data then return end
+    if not totalDamage or totalDamage <= 0 then return end
+
+    data.lastDamageTime = os.clock()
+    data.recentDamage = (data.recentDamage or 0) + totalDamage
+    data.totalDamageTaken = (data.totalDamageTaken or 0) + totalDamage
+
+    addEvent(function(botId, dmg)
+        local bd = MOBA_BOTS.Data[botId]
+        if bd then
+            bd.recentDamage = math.max(0, (bd.recentDamage or 0) - dmg)
+        end
+    end, 3000, cid, totalDamage)
+
+    if attacker then
+        -- Estruturas (torres) memorizam quem as atacou (aggro)
+        local st = MOBA.MinionState and MOBA.MinionState[cid]
+        if st and st.isStructure and not st.isNexus then
+            st.lastAttacker = attacker:getId()
+            st.lastAttackerTime = os.clock()
+        end
+
+        -- Dano de torre/núcleo (verificação por nome, sem depender de helpers locais)
+        local attackerName = attacker:getName() or ""
+        if string.find(attackerName:lower(), "torre") or string.find(attackerName:lower(), "nucleo") then
+            data.lastTowerDamageTime = os.clock()
+        end
+    end
+end
+
+-- ==========================================================
+-- SISTEMA DE DEBUFFS (LENTIDÃO REAL)
+-- ==========================================================
+
+-- Aplica lentidão em uma criatura por X segundos.
+-- Em monstros usa changeSpeed; em players usa condição de paralisia.
+function MOBA_BOTS.applySlow(targetId, reduction, duration, sourceId)
+    if not targetId or not reduction or reduction <= 0 then return false end
+    if not duration or duration <= 0 then return false end
+
+    local creature = Creature(targetId)
+    if not creature then return false end
+
+    -- Players: usa a condição nativa do servidor
+    if creature:isPlayer() then
+        pcall(function()
+            creature:addCondition(CONDITION_PARALYZE, duration * 1000, math.max(0, 80 - reduction))
+        end)
+        return true
+    end
+
+    MOBA_BOTS.Debuffs = MOBA_BOTS.Debuffs or {}
+    local now = os.clock()
+    local entry = MOBA_BOTS.Debuffs[targetId]
+    if not entry then
+        entry = {slows = {}, total = 0}
+        MOBA_BOTS.Debuffs[targetId] = entry
+    end
+
+    local had = entry.total
+    if not entry.slows[sourceId] then
+        entry.slows[sourceId] = {amount = reduction, expire = now + duration}
+    else
+        entry.slows[sourceId].expire = now + duration -- refresh
+    end
+
+    -- Recalcula total e aplica a diferença de speed
+    local newTotal = 0
+    for _, s in pairs(entry.slows) do
+        newTotal = newTotal + s.amount
+    end
+    entry.total = newTotal
+    local delta = newTotal - had
+    if delta ~= 0 then
+        pcall(function() creature:changeSpeed(-delta) end)
+    end
+
+    addEvent(function(tid, sid, dur)
+        local e = MOBA_BOTS.Debuffs and MOBA_BOTS.Debuffs[tid]
+        if not e or not e.slows[sid] then return end
+        if os.clock() >= e.slows[sid].expire then
+            local amt = e.slows[sid].amount or 0
+            e.slows[sid] = nil
+            local t = 0
+            for _, s in pairs(e.slows) do t = t + s.amount end
+            e.total = t
+            if t <= 0 then
+                MOBA_BOTS.Debuffs[tid] = nil
+            end
+            local c = Creature(tid)
+            if c and amt > 0 then
+                pcall(function() c:changeSpeed(amt) end)
+            end
+        end
+    end, duration * 1000, targetId, sourceId, duration)
+
+    return true
+end
+
+function MOBA_BOTS.cleanupDebuffs(cid)
+    if not MOBA_BOTS.Debuffs then return end
+    local entry = MOBA_BOTS.Debuffs[cid]
+    if entry then
+        local c = Creature(cid)
+        if c and entry.total and entry.total > 0 then
+            pcall(function() c:changeSpeed(entry.total) end)
+        end
+        MOBA_BOTS.Debuffs[cid] = nil
+    end
+end
+
+-- Range efetivo = range da classe + bônus (ex: utito tempo san do paladino)
+local function getEffectiveRange(data)
+    local class = MOBA_BOTS.CLASSES[data.class]
+    local range = class and class.range or 4
+    return range + (data.bonusDist or 0)
+end
 
 -- ==========================================================
 -- DIREÇÕES E OFFSETS
@@ -2168,8 +2672,8 @@ local function moveToAttackPosition(bot, targetPos, data, class)
     local pos = bot:getPosition()
     local dist = botDist(pos, targetPos)
     
-    -- Já está no range
-    if dist <= class.range then
+    -- Já está no range (efetivo, inclui bônus)
+    if dist <= getEffectiveRange(data) then
         return true
     end
     
@@ -2212,6 +2716,7 @@ local function scanEnvironment(bot, data)
     local class = MOBA_BOTS.CLASSES[data.class]
     local cfg = MOBA_BOTS.CONFIG
     local vr = cfg.VISION_RANGE
+    local effRange = getEffectiveRange(data)
     
     local env = {
         -- Posição e status
@@ -2301,6 +2806,7 @@ local function scanEnvironment(bot, data)
         allyFrontlinePos = nil,
         isBeyondLastTower = false,
         shouldWaitForWave = false,
+        shouldPush = false,
         
         -- Team focus
         teamFocusTarget = nil,
@@ -2435,7 +2941,7 @@ local function scanEnvironment(bot, data)
                     end
                     
                     -- Em range de ataque
-                    if d <= class.range then
+                    if d <= effRange then
                         table.insert(env.targetsInRange, {
                             creature = s, dist = d, hp = hp,
                             isHero = true, isMinion = false, isTower = false,
@@ -2470,7 +2976,7 @@ local function scanEnvironment(bot, data)
                     end
                     
                     -- Minion com low HP para last hit
-                    if hp <= cfg.LAST_HIT_HP_THRESHOLD and d <= class.range + 2 then
+                    if hp <= cfg.LAST_HIT_HP_THRESHOLD and d <= effRange + 2 then
                         if not env.lowHpMinion or d < env.lowHpMinionDist then
                             env.lowHpMinion = s
                             env.lowHpMinionDist = d
@@ -2478,7 +2984,7 @@ local function scanEnvironment(bot, data)
                     end
                     
                     -- Em range de ataque
-                    if d <= class.range then
+                    if d <= effRange then
                         table.insert(env.targetsInRange, {
                             creature = s, dist = d, hp = hp,
                             isHero = false, isMinion = true, isTower = false,
@@ -2508,7 +3014,7 @@ local function scanEnvironment(bot, data)
     env.hasAllyWaveNearby = env.allyMinions > 0 and env.nearestAllyMinionDist <= cfg.SAFE_LANE_DISTANCE
     
     -- Torre inimiga como alvo (se minions tankando)
-    if env.enemyTower and env.allyMinionsTankingTower and env.enemyTowerDist <= class.range then
+    if env.enemyTower and env.allyMinionsTankingTower and env.enemyTowerDist <= effRange then
         table.insert(env.targetsInRange, {
             creature = env.enemyTower,
             dist = env.enemyTowerDist,
@@ -2524,14 +3030,29 @@ local function scanEnvironment(bot, data)
     end
     
     -- ===== TEAM FOCUS =====
-    for _, ally in ipairs(env.allyHeroList) do
-        if ally.dist <= cfg.TEAM_FOCUS_RANGE then
-            local allyData = MOBA_BOTS.Data[ally.creature:getId()]
-            if allyData and allyData.lastAttackTarget then
-                local attackTarget = Creature(allyData.lastAttackTarget)
-                if attackTarget and isValidTarget(attackTarget) and isEnemyTeam(attackTarget, data) and isHero(attackTarget) then
-                    env.teamFocusTarget = attackTarget
-                    break
+    -- 1. Foco compartilhado do time (broadcast: todo mundo foca o mesmo alvo)
+    env.teamFocusTarget = nil
+    local focusInfo = MOBA_BOTS.TeamFocus and MOBA_BOTS.TeamFocus[data.teamId]
+    if focusInfo and focusInfo.cid and focusInfo.time then
+        if os.clock() - focusInfo.time <= (cfg.FOCUS_TARGET_SWITCH_CD or 2.0) * 2 then
+            local focusTarget = Creature(focusInfo.cid)
+            if focusTarget and isValidTarget(focusTarget) and isEnemyTeam(focusTarget, data) and isHero(focusTarget) then
+                env.teamFocusTarget = focusTarget
+            end
+        end
+    end
+    
+    -- 2. Fallback: aliado próximo atacando um herói
+    if not env.teamFocusTarget then
+        for _, ally in ipairs(env.allyHeroList) do
+            if ally.dist <= cfg.TEAM_FOCUS_RANGE then
+                local allyData = MOBA_BOTS.Data[ally.creature:getId()]
+                if allyData and allyData.lastAttackTarget then
+                    local attackTarget = Creature(allyData.lastAttackTarget)
+                    if attackTarget and isValidTarget(attackTarget) and isEnemyTeam(attackTarget, data) and isHero(attackTarget) then
+                        env.teamFocusTarget = attackTarget
+                        break
+                    end
                 end
             end
         end
@@ -2594,6 +3115,13 @@ local function scanEnvironment(bot, data)
             env.shouldWaitForWave = true
         end
     end
+    
+    -- ===== DEVE EMPURRAR (push de lane) =====
+    -- Wave aliada maior/igual, sem herói inimigo por perto e fora de torre = avança
+    env.shouldPush = env.allyMinions > 0 and
+        env.allyMinions >= env.enemyMinions and
+        env.nearestEnemyHeroDist > cfg.ENGAGE_RANGE and
+        not env.underEnemyTower
     
     -- ===== CÁLCULO DE PERIGO =====
     env.dangerLevel = 0
@@ -2662,8 +3190,7 @@ local function selectTarget(env, data, prioritizeTower)
     
     -- Se aliado está focando um herói, foca junto
     if env.teamFocusTarget and isValidTarget(env.teamFocusTarget) then
-        local class = MOBA_BOTS.CLASSES[data.class]
-        if botDist(env.pos, env.teamFocusTarget:getPosition()) <= class.range then
+        if botDist(env.pos, env.teamFocusTarget:getPosition()) <= getEffectiveRange(data) then
             return env.teamFocusTarget
         end
     end
@@ -2737,7 +3264,8 @@ local function doAttack(bot, target, data)
     local targetPos = target:getPosition()
     local dist = botDist(pos, targetPos)
     
-    if dist > class.range then return false end
+    -- Range efetivo inclui bônus (ex: utito tempo san do paladino)
+    if dist > getEffectiveRange(data) then return false end
     
     -- Cancela recall se estava recalling
     if data.state == MOBA_BOTS.STATE.RECALLING then
@@ -2749,10 +3277,13 @@ local function doAttack(bot, target, data)
     local dir = getDirectionTo(pos, targetPos)
     bot:setDirection(dir)
     
-    -- Calcula dano
+    -- Calcula dano (com multiplicador do auto-aprendizado)
     local baseDmg = class.atk + (data.level * class.atkGain)
     local bonusDmg = (data.bonusAtk or 0)
     local totalDmg = baseDmg + bonusDmg + math.random(-3, 3)
+    if data.learnDmgMult and data.learnDmgMult ~= 1.0 then
+        totalDmg = math.floor(totalDmg * data.learnDmgMult)
+    end
     
     -- Efeito visual de ataque
     if class.ranged and class.distEffect ~= CONST_ANI_NONE then
@@ -2829,6 +3360,16 @@ local function doAttack(bot, target, data)
             MOBA_BOTS.addScore(data.teamId, "minionsKilled", 1)
         end
         
+        -- Rubber band: time perdedor ganha mais (auto-aprendizado)
+        local catchup = 1.0
+        if MOBA_BOTS.Learning then
+            catchup = MOBA_BOTS.Learning:getCatchupMultiplier(data.teamId)
+        end
+        if catchup ~= 1.0 then
+            gold = math.floor(gold * catchup)
+            exp = math.floor(exp * catchup)
+        end
+        
         data.gold = (data.gold or 0) + gold
         data.exp = (data.exp or 0) + exp
         MOBA_BOTS.addScore(data.teamId, "totalGold", gold)
@@ -2840,9 +3381,13 @@ local function doAttack(bot, target, data)
             data.level = data.level + 1
             nextExp = MOBA_BOTS.EXP_TABLE[data.level + 1] or 999999
             
-            local newMax = class.hp + data.level * class.hpGain + (data.bonusHp or 0)
+            local newMax = (class.hp + data.level * class.hpGain) * (data.learnHpMult or 1.0) + (data.bonusHp or 0)
             bot:setMaxHealth(newMax)
             bot:addHealth(bot:getMaxHealth())
+            
+            -- Mana também cresce e recarrega no level up
+            data.maxMana = class.mana + data.level * class.manaGain
+            data.mana = data.maxMana
             
             bot:say("LEVEL UP! (" .. data.level .. ")", TALKTYPE_MONSTER_YELL)
             bot:getPosition():sendMagicEffect(CONST_ME_FIREWORK_YELLOW)
@@ -2880,6 +3425,11 @@ local function canCastSpell(data, spell)
         if now - data.lastSpellCast < MOBA_BOTS.CONFIG.SPELL_CD_GLOBAL then
             return false
         end
+    end
+    
+    -- Verifica mana suficiente
+    if (data.mana or 0) < (spell.mana or 0) then
+        return false
     end
     
     return true
@@ -2990,6 +3540,26 @@ local function findBestDirectionForWave(bot, data, spell, target)
     return bestDir
 end
 
+-- Aplica dano de magia registrando kill (FatalKillers) e o dano no alvo,
+-- para que bots reajam e a atribuição de kill funcione com addHealth direto.
+local function applySpellDamageTo(target, caster, data, amount)
+    if not target or not data or not amount then return end
+    local tid = target:getId()
+
+    -- Atribui o golpe fatal (se a magia matar)
+    if target:getHealth() <= amount then
+        MOBA.FatalKillers = MOBA.FatalKillers or {}
+        MOBA.FatalKillers[tid] = data.myId
+    end
+
+    -- Bots reagem ao dano de magia (lastDamageTime etc.)
+    if MOBA_BOTS and MOBA_BOTS.handleBotDamage then
+        MOBA_BOTS.handleBotDamage(tid, caster, amount)
+    end
+
+    target:addHealth(-amount)
+end
+
 local function castSpell(bot, data, spell, target, direction)
     if not bot or not data or not spell then return false end
     
@@ -3038,7 +3608,7 @@ local function castSpell(bot, data, spell, target, direction)
         -- Aplica dano
         if spell.damage then
             MOBA_BOTS.registerDamage(target:getId(), "spell", effectValue, data.myId)
-            target:addHealth(-effectValue)
+            applySpellDamageTo(target, bot, data, effectValue)
         end
         
         logSpell(data, spell.name, getCreatureName(target))
@@ -3047,6 +3617,10 @@ local function castSpell(bot, data, spell, target, direction)
     -- ===== SPELL ABSOLUTE (área centrada no caster) =====
     elseif spell.type == "absolute" then
         local areaPositions = getSpellAreaPositions(pos, spell, direction or bot:getDirection())
+        
+        -- Não desperdiça mana se não há inimigos na área
+        local areaCount = countEnemiesInArea(areaPositions, data)
+        if areaCount == 0 then return false end
         
         -- Efeito visual na área
         for _, areaPos in ipairs(areaPositions) do
@@ -3073,7 +3647,7 @@ local function castSpell(bot, data, spell, target, direction)
                         hitEnemies[cid] = true
                         hitCount = hitCount + 1
                         MOBA_BOTS.registerDamage(cid, "spell", effectValue, data.myId)
-                        c:addHealth(-effectValue)
+                        applySpellDamageTo(c, bot, data, effectValue)
                         c:getPosition():sendMagicEffect(CONST_ME_HITBYFIRE)
                     end
                 end
@@ -3089,6 +3663,10 @@ local function castSpell(bot, data, spell, target, direction)
         bot:setDirection(waveDir)
         
         local areaPositions = getSpellAreaPositions(pos, spell, waveDir)
+        
+        -- Não desperdiça mana se não há inimigos na área
+        local areaCount = countEnemiesInArea(areaPositions, data)
+        if areaCount == 0 then return false end
         
         -- Efeito visual na área
         for _, areaPos in ipairs(areaPositions) do
@@ -3110,7 +3688,7 @@ local function castSpell(bot, data, spell, target, direction)
                         hitEnemies[cid] = true
                         hitCount = hitCount + 1
                         MOBA_BOTS.registerDamage(cid, "spell", effectValue, data.myId)
-                        c:addHealth(-effectValue)
+                        applySpellDamageTo(c, bot, data, effectValue)
                     end
                 end
             end
@@ -3171,6 +3749,11 @@ local function castSpell(bot, data, spell, target, direction)
                 data[stat] = (data[stat] or 0) + value
             end
             
+            -- Bônus de velocidade também aplica na criatura
+            if spell.bonuses.bonusSpeed then
+                pcall(function() bot:changeSpeed(spell.bonuses.bonusSpeed) end)
+            end
+            
             pos:sendMagicEffect(spell.effect or CONST_ME_MAGIC_GREEN)
             
             -- Remove buff após duração
@@ -3182,6 +3765,10 @@ local function castSpell(bot, data, spell, target, direction)
                             bd[stat] = (bd[stat] or 0) - value
                         end
                     end
+                    local b = Creature(botId)
+                    if b and bonuses.bonusSpeed then
+                        pcall(function() b:changeSpeed(-bonuses.bonusSpeed) end)
+                    end
                 end, spell.duration * 1000, data.myId, spell.bonuses)
             end
         end
@@ -3189,7 +3776,7 @@ local function castSpell(bot, data, spell, target, direction)
         logSpell(data, spell.name)
         success = true
     
-    -- ===== SPELL DEBUFF =====
+    -- ===== SPELL DEBUFF (lentidão real) =====
     elseif spell.type == "debuff" then
         if not target then return false end
         
@@ -3201,8 +3788,44 @@ local function castSpell(bot, data, spell, target, direction)
             targetPos:sendMagicEffect(spell.effect)
         end
         
-        -- Aplica debuff (simplificado - apenas visual)
+        -- Aplica lentidão real (reduz speed do alvo por alguns segundos)
+        if spell.bonuses and spell.bonuses.slow then
+            local pct = spell.bonuses.slow / 100
+            local baseSpeed = 220
+            local ok, bs = pcall(function() return target:getBaseSpeed() end)
+            if ok and bs and bs > 0 then baseSpeed = bs end
+            local reduction = math.max(20, math.floor(baseSpeed * pct))
+            MOBA_BOTS.applySlow(target:getId(), reduction, spell.duration or 5, data.myId)
+        end
+        
         logSpell(data, spell.name, getCreatureName(target))
+        success = true
+    
+    -- ===== SPELL TAUNT (provocação do Knight) =====
+    elseif spell.type == "taunt" then
+        local radius = spell.radius or 4
+        pos:sendMagicEffect(spell.effect or CONST_ME_MAGIC_RED)
+        bot:say(spell.words, TALKTYPE_MONSTER_YELL)
+        
+        -- Força inimigos próximos a focar o tank
+        local specs = Game.getSpectators(pos, false, false, radius, radius, radius, radius)
+        local taunted = 0
+        for _, s in ipairs(specs) do
+            if isValidTarget(s) and isEnemyTeam(s, data) then
+                pcall(function()
+                    doChallengeCreature(s:getId(), data.myId)
+                end)
+                s:getPosition():sendMagicEffect(CONST_ME_MAGIC_RED)
+                taunted = taunted + 1
+            end
+        end
+        
+        -- Dá um pequeno bônus de defesa enquanto dura (tank segurando aggro)
+        if spell.duration and taunted > 0 then
+            data.tauntShieldUntil = os.clock() + spell.duration
+        end
+        
+        logSpell(data, spell.name, string.format("(%d inimigos provocados)", taunted))
         success = true
     end
     
@@ -3211,6 +3834,11 @@ local function castSpell(bot, data, spell, target, direction)
         data.spellCooldowns = data.spellCooldowns or {}
         data.spellCooldowns[spell.name] = now
         data.lastSpellCast = now
+        
+        -- Gasta mana
+        if spell.mana and spell.mana > 0 then
+            data.mana = math.max(0, (data.mana or 0) - spell.mana)
+        end
         
         -- Fala o spell (exceto heal ally que já falou)
         if spell.type ~= "heal_ally" then
@@ -3339,6 +3967,50 @@ local function tryUseSpells(bot, data, env, target)
         end
     end
     
+    -- ===== DEBUFF (lentidão) em herói inimigo =====
+    if target and isHero(target) then
+        local targetId = target:getId()
+        local alreadySlowed = false
+        local db = MOBA_BOTS.Debuffs and MOBA_BOTS.Debuffs[targetId]
+        if db and db.total and db.total > 0 then
+            alreadySlowed = true
+        end
+        if not alreadySlowed then
+            for _, spell in ipairs(class.spells) do
+                if spell.type == "debuff" and canCastSpell(data, spell) then
+                    if botDist(pos, target:getPosition()) <= (spell.range or 4) then
+                        if castSpell(bot, data, spell, target, nil) then
+                            return true
+                        end
+                    end
+                end
+            end
+        end
+    end
+    
+    -- ===== TAUNT (Knight tank segurando aggro) =====
+    if data.class == "knight" then
+        local enemiesNear = 0
+        local specs = Game.getSpectators(pos, false, false, 4, 4, 4, 4)
+        for _, s in ipairs(specs) do
+            if isValidTarget(s) and isEnemyTeam(s, data) then
+                enemiesNear = enemiesNear + 1
+            end
+        end
+        
+        -- Usa quando: 2+ inimigos por perto, ou aliado próximo em perigo
+        local allyNear = env.allyHeroes > 0 or env.allyMinions > 0
+        if enemiesNear >= 2 or (enemiesNear >= 1 and env.allyNeedingHeal and env.allyNeedingHealDist <= 6) then
+            for _, spell in ipairs(class.spells) do
+                if spell.type == "taunt" and canCastSpell(data, spell) then
+                    if castSpell(bot, data, spell, nil, nil) then
+                        return true
+                    end
+                end
+            end
+        end
+    end
+    
     return false
 end
 
@@ -3370,6 +4042,27 @@ local function tryUsePotion(bot, data, env)
             bot:say("*gulp*", TALKTYPE_MONSTER_SAY)
             
             logUseItem(data, "Health Potion", string.format("HP %.0f%% -> +%d", env.hp * 100, heal))
+            return true
+        end
+    end
+    
+    -- Mana Potion (prioridade se estiver em combate e sem mana p/ spells)
+    local manaPct = 1
+    if data.maxMana and data.mana then
+        manaPct = data.mana / data.maxMana
+    end
+    if manaPct < cfg.USE_MANA_POT_THRESHOLD then
+        local manaPots = data.manaPots or 0
+        if manaPots > 0 then
+            data.manaPots = manaPots - 1
+            data.lastPotionUse = now
+            
+            local restore = 100 + data.level * 8
+            data.mana = math.min(data.maxMana or restore, (data.mana or 0) + restore)
+            bot:getPosition():sendMagicEffect(CONST_ME_MAGIC_GREEN)
+            bot:say("*gulp*", TALKTYPE_MONSTER_SAY)
+            
+            logUseItem(data, "Mana Potion", string.format("Mana %.0f%% -> +%d", manaPct * 100, restore))
             return true
         end
     end
@@ -3464,12 +4157,24 @@ local function tryBuyItems(bot, data)
     local cfg = MOBA_BOTS.CONFIG
     local class = MOBA_BOTS.CLASSES[data.class]
     
-    -- Primeiro: garante poções
+    -- Primeiro: garante poções do tipo principal da classe
     local potType = class.potionType or "health"
     local currentPots = potType == "health" and (data.hpPots or 0) or (data.manaPots or 0)
     
     if currentPots < cfg.MIN_POTS_TO_BUY then
         buyPotions(data, potType == "health" and "hp" or "mana", cfg.MIN_POTS_TO_BUY)
+    end
+    
+    -- Todos os bots também carregam um pouco do outro tipo
+    -- (magos carregam HP pots para emergência, tanques carregam mana p/ spells)
+    if potType == "health" then
+        if (data.manaPots or 0) < 2 then
+            buyPotions(data, "mana", 2)
+        end
+    else
+        if (data.hpPots or 0) < 2 then
+            buyPotions(data, "hp", 2)
+        end
     end
     
     -- Atualiza gold após compra de poções
@@ -3717,6 +4422,14 @@ local function shouldDefendTower(data, env)
         return false
     end
     
+    -- Herói inimigo atacando nossa torre (mesmo sem minions) = defender!
+    if env.allyTowerPos and env.nearestEnemyHero and env.nearestEnemyHeroDist <= cfg.DEFEND_TOWER_RANGE then
+        local heroPos = env.nearestEnemyHero:getPosition()
+        if botDist(heroPos, env.allyTowerPos) <= cfg.TOWER_RANGE + 2 then
+            return true
+        end
+    end
+    
     -- Não tem minions na torre aliada
     if env.enemyMinionsAtAllyTower == 0 then
         return false
@@ -3812,8 +4525,9 @@ local function shouldAllIn(data, env)
         return data.allInDecided == "yes"
     end
     
-    -- Chance de all-in
-    if math.random() <= cfg.ALL_IN_CHANCE then
+    -- Chance de all-in (ajustada pelo auto-aprendizado)
+    local chance = cfg.ALL_IN_CHANCE * (1 + (data.learnAggression or 0))
+    if math.random() <= chance then
         data.allInDecided = "yes"
         data.allInTarget = env.allInTarget
         return true
@@ -3945,7 +4659,10 @@ local function canEngage(data, env)
     local enemyPower = env.enemyHeroes + env.enemyMinions * 0.25
     
     -- Precisa de vantagem numérica ou inimigo com HP baixo
-    return myPower >= enemyPower + 0.5 or (env.nearestEnemyHeroHp < 0.35 and myPower >= enemyPower)
+    -- (agressividade é ajustada pelo auto-aprendizado)
+    local aggression = (data.learnAggression or 0)
+    local requiredAdvantage = math.max(0.2, 0.6 - aggression * 1.5)
+    return myPower >= enemyPower + requiredAdvantage or (env.nearestEnemyHeroHp < 0.35 and myPower >= enemyPower)
 end
 
 local function canApproachTower(data, env)
@@ -4062,6 +4779,16 @@ end
 -- BOT THINK - LÓGICA PRINCIPAL
 -- ==========================================================
 
+-- Compartilha o alvo com os aliados próximos (focus fire coordenado)
+local function broadcastTeamFocus(data, target)
+    if not data or not target then return end
+    if not isHero(target) then return end
+    MOBA_BOTS.TeamFocus = MOBA_BOTS.TeamFocus or {}
+    MOBA_BOTS.LastTeamFocusTime = MOBA_BOTS.LastTeamFocusTime or {}
+    MOBA_BOTS.TeamFocus[data.teamId] = {cid = target:getId(), time = os.clock()}
+    MOBA_BOTS.LastTeamFocusTime[data.teamId] = os.clock()
+end
+
 function BotThink(cid)
     local bot = Creature(cid)
     if not bot or bot:getHealth() <= 0 then return end
@@ -4075,7 +4802,9 @@ function BotThink(cid)
     local class = MOBA_BOTS.CLASSES[data.class]
     local pos = bot:getPosition()
     local now = os.clock()
-    local canAtk = not data.lastAtk or (now - data.lastAtk) >= MOBA_BOTS.CONFIG.ATTACK_CD
+    -- Velocidade de ataque por classe (fallback no config global)
+    local atkSpeed = class.atkSpeed or MOBA_BOTS.CONFIG.ATTACK_CD
+    local canAtk = not data.lastAtk or (now - data.lastAtk) >= atkSpeed
     local cfg = MOBA_BOTS.CONFIG
     local interval = cfg.THINK_INTERVAL
 
@@ -4093,6 +4822,12 @@ function BotThink(cid)
     -- Limpeza periódica de cache
     if math.random(1, 100) == 1 then
         MOBA_BOTS.cleanupDamageTrackers()
+    end
+    
+    -- Garante mana inicial (compatibilidade com bots antigos)
+    if not data.maxMana then
+        data.maxMana = class.mana + data.level * class.manaGain
+        data.mana = data.maxMana
     end
 
     -- ==========================================================
@@ -4142,6 +4877,17 @@ function BotThink(cid)
     
     -- Atualiza flags de estado
     data.inBase = env.inBaseZone
+    
+    -- ==========================================================
+    -- REGEN DE MANA (mais rápido na base, lento em combate)
+    -- ==========================================================
+    if data.maxMana then
+        local regenPct = isInCombat(data) and 0.015 or 0.05
+        if env.inBaseZone or env.inHealZone then
+            regenPct = 0.10
+        end
+        data.mana = math.min(data.maxMana, (data.mana or 0) + data.maxMana * regenPct * (interval / 1000))
+    end
 
     -- ==========================================================
     -- PRIORIDADE 0: EMERGÊNCIA ABSOLUTA - TOMANDO DANO DE TORRE
@@ -4213,8 +4959,13 @@ function BotThink(cid)
             return
         end
         
-        -- Foge pela lane
-        retreatLane(bot, data)
+        -- Foge para a melhor posição segura (atrás da torre/wave)
+        local safePos = getBestRetreatPosition(data, env)
+        if safePos then
+            moveTowards(bot, safePos, data)
+        else
+            retreatLane(bot, data)
+        end
         
         addEvent(BotThink, cfg.THINK_INTERVAL_CRITICAL, cid)
         return
@@ -4392,11 +5143,14 @@ function BotThink(cid)
         if target and isValidTarget(target) then
             local targetPos = target:getPosition()
             local distToTarget = botDist(pos, targetPos)
+            local effRange = getEffectiveRange(data)
             
             tryUseSupplies(bot, data, env)
             tryUseSpells(bot, data, env, target)
             
-            if distToTarget <= class.range then
+            broadcastTeamFocus(data, target)
+            
+            if distToTarget <= effRange then
                 if canAtk then
                     doAttack(bot, target, data)
                 end
@@ -4444,29 +5198,32 @@ function BotThink(cid)
         
         local enemyPos = env.nearestEnemyHeroPos
         local distToEnemy = env.nearestEnemyHeroDist
+        local effRange = getEffectiveRange(data)
         
         tryUseSupplies(bot, data, env)
         tryUseSpells(bot, data, env, env.nearestEnemyHero)
         
+        broadcastTeamFocus(data, env.nearestEnemyHero)
+        
         if class.ranged then
             -- Ataca se em range
-            if distToEnemy <= class.range and canAtk then
+            if distToEnemy <= effRange and canAtk then
                 doAttack(bot, env.nearestEnemyHero, data)
             end
             
             -- Kiting: afasta se muito perto
             if distToEnemy < cfg.RANGED_OPTIMAL_DISTANCE then
                 moveAway(bot, enemyPos, data)
-            elseif distToEnemy > class.range then
+            elseif distToEnemy > effRange then
                 moveToAttackPosition(bot, enemyPos, data, class)
             end
         else
             -- Melee
             if env.duelAdvantage or env.hp > env.nearestEnemyHeroHp then
-                if distToEnemy <= class.range and canAtk then
+                if distToEnemy <= effRange and canAtk then
                     doAttack(bot, env.nearestEnemyHero, data)
                 end
-                if distToEnemy > class.range then
+                if distToEnemy > effRange then
                     moveToAttackPosition(bot, enemyPos, data, class)
                 end
             else
@@ -4526,10 +5283,11 @@ function BotThink(cid)
             if env.nearestEnemyMinionAtTower then
                 local minionPos = env.nearestEnemyMinionAtTower:getPosition()
                 local minionDist = botDist(pos, minionPos)
+                local effRange = getEffectiveRange(data)
                 
                 tryUseSpells(bot, data, env, env.nearestEnemyMinionAtTower)
                 
-                if minionDist <= class.range then
+                if minionDist <= effRange then
                     if canAtk then
                         doAttack(bot, env.nearestEnemyMinionAtTower, data)
                     end
@@ -4557,11 +5315,14 @@ function BotThink(cid)
         if target and isValidTarget(target) then
             local targetPos = target:getPosition()
             local distToTarget = botDist(pos, targetPos)
+            local effRange = getEffectiveRange(data)
             
             tryUseSupplies(bot, data, env)
             tryUseSpells(bot, data, env, target)
             
-            if distToTarget <= class.range then
+            broadcastTeamFocus(data, target)
+            
+            if distToTarget <= effRange then
                 if canAtk then
                     doAttack(bot, target, data)
                 end
@@ -4662,7 +5423,12 @@ function BotThink(cid)
         
         -- Ainda precisa recuar?
         if shouldRetreat(data, env) or not isSafe(data) then
-            retreatLane(bot, data)
+            local safePos = getBestRetreatPosition(data, env)
+            if safePos then
+                moveTowards(bot, safePos, data)
+            else
+                retreatLane(bot, data)
+            end
             addEvent(BotThink, interval, cid)
             return
         end
@@ -4739,52 +5505,46 @@ function BotThink(cid)
     -- COMBATE
     -- ==========================================================
     
-    -- Seleciona alvo
+    -- Seleciona alvo com sistema de pontuação (herói focado > last hit > minion > torre)
     local target = nil
     local targetDist = 999
+    local effRange = getEffectiveRange(data)
     
-    -- Prioridade 1: Herói inimigo em range
-    if env.enemyHeroInRange and isTargetSafeToAttack(env.enemyHeroInRange, data, env) then
-        target = env.enemyHeroInRange
-        targetDist = env.enemyHeroInRangeDist
-    end
-    
-    -- Prioridade 2: Minion com low HP (last hit)
-    if not target and env.lowHpMinion and env.lowHpMinionDist <= class.range then
-        if isTargetSafeToAttack(env.lowHpMinion, data, env) then
-            target = env.lowHpMinion
-            targetDist = env.lowHpMinionDist
+    if #env.targetsInRange > 0 then
+        local best = selectTarget(env, data, false)
+        if best and isTargetSafeToAttack(best, data, env) then
+            target = best
+            targetDist = botDist(pos, best:getPosition())
         end
     end
     
-    -- Prioridade 3: Qualquer minion em range
-    if not target and env.nearestEnemyMinion and env.nearestEnemyMinionDist <= class.range then
-        if isTargetSafeToAttack(env.nearestEnemyMinion, data, env) then
-            target = env.nearestEnemyMinion
-            targetDist = env.nearestEnemyMinionDist
-        end
-    end
-    
-    -- Prioridade 4: Torre (se minions tankando)
-    if not target and env.enemyTower and env.allyMinionsTankingTower then
-        if env.enemyTowerDist <= class.range then
-            target = env.enemyTower
-            targetDist = env.enemyTowerDist
-        end
-    end
-    
-    -- Se tem alvo, ataca
+    -- Se tem alvo, ataca (com orb-walking para ranged)
     if target and canAtk then
         setState(data, MOBA_BOTS.STATE.FIGHTING)
         tryUseSupplies(bot, data, env)
         tryUseSpells(bot, data, env, target)
         doAttack(bot, target, data)
         
+        -- Compartilha o alvo com o time (focus fire)
+        broadcastTeamFocus(data, target)
+        
         -- Kiting para ranged após atacar
         if class.ranged and targetDist < cfg.RANGED_KITE_DISTANCE and isHero(target) then
             kiteAway(bot, target:getPosition(), data, class)
         end
         
+        addEvent(BotThink, cfg.THINK_INTERVAL_COMBAT, cid)
+        return
+    end
+    
+    -- Se tem alvo mas está em cooldown de ataque, aproxima/posiciona (orb-walk)
+    if target and not canAtk then
+        setState(data, MOBA_BOTS.STATE.FIGHTING)
+        if targetDist > effRange then
+            moveToAttackPosition(bot, target:getPosition(), data, class)
+        elseif class.ranged and targetDist < cfg.RANGED_KITE_DISTANCE then
+            kiteAway(bot, target:getPosition(), data, class)
+        end
         addEvent(BotThink, cfg.THINK_INTERVAL_COMBAT, cid)
         return
     end
@@ -4865,7 +5625,7 @@ function BotThink(cid)
             tryUseSupplies(bot, data, env)
             
             -- Ataca se pode
-            if canAtk and env.nearestEnemyCreatureDist <= class.range then
+            if canAtk and env.nearestEnemyCreatureDist <= getEffectiveRange(data) then
                 tryUseSpells(bot, data, env, env.nearestEnemyCreature)
                 doAttack(bot, env.nearestEnemyCreature, data)
             end
@@ -4915,7 +5675,9 @@ function BotThink(cid)
         tryUseSupplies(bot, data, env)
         tryUseSpells(bot, data, env, env.enemyTower)
         
-        if env.enemyTowerDist <= class.range then
+        local effRange = getEffectiveRange(data)
+        
+        if env.enemyTowerDist <= effRange then
             if canAtk then
                 doAttack(bot, env.enemyTower, data)
             end
@@ -4940,7 +5702,9 @@ function BotThink(cid)
         tryUseSupplies(bot, data, env)
         tryUseSpells(bot, data, env, env.lowHpEnemy)
         
-        if botDist(pos, targetPos) <= class.range then
+        broadcastTeamFocus(data, env.lowHpEnemy)
+        
+        if botDist(pos, targetPos) <= getEffectiveRange(data) then
             if canAtk then
                 doAttack(bot, env.lowHpEnemy, data)
             end
@@ -4963,7 +5727,9 @@ function BotThink(cid)
         tryUseSupplies(bot, data, env)
         tryUseSpells(bot, data, env, env.nearestEnemyHero)
         
-        if env.nearestEnemyHeroDist <= class.range then
+        broadcastTeamFocus(data, env.nearestEnemyHero)
+        
+        if env.nearestEnemyHeroDist <= getEffectiveRange(data) then
             if canAtk then
                 doAttack(bot, env.nearestEnemyHero, data)
             end
@@ -4980,14 +5746,24 @@ function BotThink(cid)
     -- ==========================================================
     setState(data, MOBA_BOTS.STATE.LANING)
     
-    if env.hasAllyWaveNearby then
-        -- Acompanha a wave
+    if env.shouldPush then
+        -- Wave aliada maior: empurra a lane (push)
+        advanceLane(bot, data)
+    elseif env.hasAllyWaveNearby then
+        -- Acompanha a wave (posição atrás da frontline)
         if env.allyFrontlinePos then
             local behindPos = getPosBehind(env.allyFrontlinePos, data.teamId, 2)
             if behindPos and botDist(pos, behindPos) > 2 then
                 moveTowards(bot, behindPos, data)
             else
-                advanceLane(bot, data)
+                -- Segura posição: last hit em minions em range
+                if canAtk and #env.targetsInRange > 0 then
+                    local t = selectTarget(env, data, false)
+                    if t and isTargetSafeToAttack(t, data, env) then
+                        tryUseSpells(bot, data, env, t)
+                        doAttack(bot, t, data)
+                    end
+                end
             end
         else
             advanceLane(bot, data)
@@ -5017,7 +5793,7 @@ function MOBA_BOTS.spawn(teamId, className)
     return MOBA_BOTS.respawnClone(teamId, className, 8, MOBA_BOTS.EXP_TABLE[8], MOBA_BOTS.CONFIG.STARTING_GOLD)
 end
 
-function MOBA_BOTS.respawnClone(teamId, className, level, exp, gold, skill)
+function MOBA_BOTS.respawnClone(teamId, className, level, exp, gold, skill, uid, lane)
     if not MOBA then return false end
     
     local team = MOBA_BOTS.TEAMS[teamId]
@@ -5055,11 +5831,20 @@ function MOBA_BOTS.respawnClone(teamId, className, level, exp, gold, skill)
     
     bot:setSkull(mobaTeam.skull)
     
-    local maxHp = class.hp + level * class.hpGain
+    -- Ajustes do auto-aprendizado (winrate histórico da classe)
+    local learnAdj = {dmgMult = 1.0, hpMult = 1.0, aggression = 0.0}
+    if MOBA_BOTS.Learning then
+        learnAdj = MOBA_BOTS.Learning:getAdjustments(className)
+    end
+    
+    local maxHp = (class.hp + level * class.hpGain) * learnAdj.hpMult
     bot:setMaxHealth(maxHp)
     bot:addHealth(maxHp)
     
-    local uid = tostring(teamId) .. "_" .. className .. "_" .. tostring(os.time()) .. "_" .. tostring(math.random(1000, 9999))
+    local maxMana = class.mana + level * class.manaGain
+    
+    -- Preserva identidade/lane se vier do respawn (senão gera novo)
+    local uid = uid or (tostring(teamId) .. "_" .. className .. "_" .. tostring(os.time()) .. "_" .. tostring(math.random(1000, 9999)))
 
     MOBA_BOTS.Data[cid] = {
 	towerFleeAttempts = 0,
@@ -5079,7 +5864,7 @@ function MOBA_BOTS.respawnClone(teamId, className, level, exp, gold, skill)
         stateTime = os.clock(),
         stateLoops = 0,
         myId = cid,
-        assignedLane = nil,
+        assignedLane = lane or nil,
         wpIndex = 1,
         lastDefenseCheck = 0,
         lastEnemySeenTime = os.time(),
@@ -5102,6 +5887,7 @@ function MOBA_BOTS.respawnClone(teamId, className, level, exp, gold, skill)
         bonusHp = 0,
         bonusSpeed = 0,
         bonusDef = 0,
+        bonusDist = 0,
         hpPots = 0,
         manaPots = 0,
         lastPotionUse = 0,
@@ -5117,7 +5903,12 @@ function MOBA_BOTS.respawnClone(teamId, className, level, exp, gold, skill)
         assists = 0,
         totalDamageDealt = 0,
         totalDamageTaken = 0,
-        totalHealingDone = 0
+        totalHealingDone = 0,
+        maxMana = maxMana,
+        mana = maxMana,
+        learnDmgMult = learnAdj.dmgMult,
+        learnHpMult = learnAdj.hpMult,
+        learnAggression = learnAdj.aggression
     }
     
     if MOBA.MinionState then
@@ -5130,7 +5921,12 @@ function MOBA_BOTS.respawnClone(teamId, className, level, exp, gold, skill)
     
     bot:getPosition():sendMagicEffect(CONST_ME_TELEPORT)
     
-    logBot(MOBA_BOTS.Data[cid], "SPAWN", string.format("Level %d com %d gold", level, gold or 0))
+    -- Lane preservada no respawn: garante que a persistência acompanhe
+    if lane then
+        MOBA_BOTS.PersistentLanes[uid] = lane
+    end
+    
+    logBot(MOBA_BOTS.Data[cid], "SPAWN", string.format("Level %d com %d gold | dmg x%.2f hp x%.2f", level, gold or 0, learnAdj.dmgMult, learnAdj.hpMult))
 
     addEvent(function(bc)
         local b = Creature(bc)
@@ -5158,6 +5954,11 @@ function MOBA_BOTS.handleBotDeath(cid, oldData)
 
     if uid and assignedLane then
         MOBA_BOTS.PersistentLanes[uid] = assignedLane
+    end
+    
+    -- Limpa debuffs pendentes (restaura speed antes de remover)
+    if MOBA_BOTS.cleanupDebuffs then
+        MOBA_BOTS.cleanupDebuffs(cid)
     end
     
     MOBA_BOTS.Data[cid] = nil
@@ -5211,9 +6012,17 @@ function MOBA_BOTS.handleBotDeath(cid, oldData)
         
         bot:setSkull(mobaTeam.skull)
         
-        local maxHp = class.hp + lv * class.hpGain
+        -- Ajustes do auto-aprendizado
+        local learnAdj = {dmgMult = 1.0, hpMult = 1.0, aggression = 0.0}
+        if MOBA_BOTS.Learning then
+            learnAdj = MOBA_BOTS.Learning:getAdjustments(cN)
+        end
+        
+        local maxHp = (class.hp + lv * class.hpGain) * learnAdj.hpMult
         bot:setMaxHealth(maxHp)
         bot:addHealth(maxHp)
+        
+        local maxMana = class.mana + lv * class.manaGain
 
         MOBA_BOTS.Data[nc] = {
             uniqueId = u,
@@ -5254,6 +6063,7 @@ function MOBA_BOTS.handleBotDeath(cid, oldData)
             bonusHp = 0,
             bonusSpeed = 0,
             bonusDef = 0,
+            bonusDist = 0,
             hpPots = 0,
             manaPots = 0,
             lastPotionUse = 0,
@@ -5269,7 +6079,12 @@ function MOBA_BOTS.handleBotDeath(cid, oldData)
             assists = 0,
             totalDamageDealt = 0,
             totalDamageTaken = 0,
-            totalHealingDone = 0
+            totalHealingDone = 0,
+            maxMana = maxMana,
+            mana = maxMana,
+            learnDmgMult = learnAdj.dmgMult,
+            learnHpMult = learnAdj.hpMult,
+            learnAggression = learnAdj.aggression
         }
         
         if MOBA.MinionState then
@@ -5341,35 +6156,14 @@ end
 -- CREATURE EVENTS - HEALTH CHANGE (para tracking de dano)
 -- ==========================================================
 
+-- Nota: o tracking real de dano dos bots acontece via MOBA_BOTS.handleBotDamage,
+-- chamado por moba_combat.lua (evento MobaHealthChange registrado no XML).
+-- Esta função fica como compatibilidade caso o evento seja registrado em outro distro.
 function onBotHealthChange(creature, attacker, primaryDamage, primaryType, secondaryDamage, secondaryType, origin)
     local cid = creature:getId()
-    local data = MOBA_BOTS.Data[cid]
-    
-    if data then
-        local totalDamage = primaryDamage + secondaryDamage
-        
-        if totalDamage > 0 then
-            data.lastDamageTime = os.clock()
-            data.recentDamage = (data.recentDamage or 0) + totalDamage
-            data.totalDamageTaken = (data.totalDamageTaken or 0) + totalDamage
-            
-            -- Reset recentDamage após um tempo
-            addEvent(function(botId, dmg)
-                local bd = MOBA_BOTS.Data[botId]
-                if bd then
-                    bd.recentDamage = math.max(0, (bd.recentDamage or 0) - dmg)
-                end
-            end, 3000, cid, totalDamage)
-            
-            -- Verifica se foi dano de torre
-            if attacker then
-                if isTower(attacker) or isNexus(attacker) then
-                    data.lastTowerDamageTime = os.clock()
-                end
-            end
-        end
+    if MOBA_BOTS and MOBA_BOTS.handleBotDamage then
+        MOBA_BOTS.handleBotDamage(cid, attacker, (primaryDamage or 0) + (secondaryDamage or 0))
     end
-    
     return primaryDamage, primaryType, secondaryDamage, secondaryType
 end
 
@@ -5391,11 +6185,16 @@ function MOBA_BOTS.debugBot(cid)
     print("=== BOT " .. cid .. " ===")
     print("Class: " .. d.class .. " | Team: " .. d.teamId .. " | Level: " .. d.level)
     print("HP: " .. string.format("%.0f%%", hp * 100) .. " | Gold: " .. (d.gold or 0))
+    local manaStr = d.maxMana and string.format("%.0f/%.0f", d.mana or 0, d.maxMana) or "-"
+    print("Mana: " .. manaStr)
     print("State: " .. (MOBA_BOTS.STATE_NAMES[d.state] or "?"))
     print("Lane: " .. (d.assignedLane or "?") .. " | WP: " .. (d.wpIndex or 0))
     print("Pos: " .. p.x .. "," .. p.y .. " | Stuck: " .. (d.stuckCount or 0))
     print("HpPots: " .. (d.hpPots or 0) .. " | ManaPots: " .. (d.manaPots or 0))
     print("BonusAtk: " .. (d.bonusAtk or 0) .. " | BonusHp: " .. (d.bonusHp or 0))
+    if d.learnDmgMult then
+        print("Learn: dmg x" .. string.format("%.2f", d.learnDmgMult) .. " hp x" .. string.format("%.2f", d.learnHpMult or 1) .. " agg " .. string.format("%+.2f", d.learnAggression or 0))
+    end
     print("Kills: " .. (d.kills or 0) .. " | Deaths: " .. (d.deaths or 0) .. " | Assists: " .. (d.assists or 0))
     print("Dmg Dealt: " .. (d.totalDamageDealt or 0) .. " | Dmg Taken: " .. (d.totalDamageTaken or 0))
     print("=================")
@@ -5611,7 +6410,17 @@ end
 -- INITIALIZATION
 -- ==========================================================
 
-print("[MOBA_BOTS v47] Sistema de bots carregado!")
+-- Conveniência para ver o estado do auto-aprendizado
+function MOBA_BOTS.learningStatus()
+    if MOBA_BOTS.Learning then
+        MOBA_BOTS.Learning:status()
+    else
+        print("[MOBA_BOTS] Sistema de aprendizado não disponível")
+    end
+end
+
+print("[MOBA_BOTS v48] Sistema de bots carregado!")
 print("[MOBA_BOTS] Estados: " .. #MOBA_BOTS.STATE_NAMES)
 print("[MOBA_BOTS] Classes: knight, paladin, sorcerer, druid")
-print("[MOBA_BOTS] Comandos: debugBot(id), debugAllBots(), debugEnvironment(id)")
+print("[MOBA_BOTS] Auto-aprendizado: " .. (MOBA_BOTS.Learning and MOBA_BOTS.Learning.enabled and "ATIVO" or "desativado"))
+print("[MOBA_BOTS] Comandos: debugBot(id), debugAllBots(), debugEnvironment(id), learningStatus()")
