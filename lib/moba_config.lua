@@ -137,11 +137,14 @@ MOBA = {
         PLAYER_KILL = 300, TOWER = 500, NEXUS = 1000, ASSIST_PERCENT = 0.5
     },
 
+    -- Nota: o dano agora é aplicado UMA vez (doTargetCombatHealth).
+    -- Antes o executeAttack aplicava addHealth + doTargetCombatHealth (dano dobrado).
+    -- Os valores abaixo já compensam isso.
     MINIONS_CONFIG = {
-        ["dwarf soldier"] = {range = 3, minDmg = 10, maxDmg = 20, attackSpeed = 1500, distEffect = CONST_ANI_BOLT, gold = 30, xp = 800, type = "ranged"},
-        ["dwarf geomancer"] = {range = 4, minDmg = 20, maxDmg = 30, attackSpeed = 1500, distEffect = CONST_ANI_EARTH, gold = 50, xp = 2000, type = "ranged"},
-        ["dwarf"] = {range = 1, minDmg = 5, maxDmg = 10, attackSpeed = 1500, gold = 10, xp = 500, type = "melee"},
-        ["default"] = {range = 1, minDmg = 10, maxDmg = 20, attackSpeed = 1500, type = "melee", gold = 0, xp = 0}
+        ["dwarf soldier"] = {range = 3, minDmg = 18, maxDmg = 30, attackSpeed = 1500, distEffect = CONST_ANI_BOLT, gold = 30, xp = 800, type = "ranged"},
+        ["dwarf geomancer"] = {range = 4, minDmg = 30, maxDmg = 46, attackSpeed = 1500, distEffect = CONST_ANI_EARTH, gold = 50, xp = 2000, type = "ranged"},
+        ["dwarf"] = {range = 1, minDmg = 8, maxDmg = 15, attackSpeed = 1500, gold = 10, xp = 500, type = "melee"},
+        ["default"] = {range = 1, minDmg = 14, maxDmg = 24, attackSpeed = 1500, type = "melee", gold = 0, xp = 0}
     },
 
     MINIONS = {
@@ -220,6 +223,13 @@ function MOBA.getNextObjective(teamId, lane)
         return {type = "nexus", pos = enemyTeam.nexus.pos, lane = lane}
     end
     return nil
+end
+
+function MOBA.onTowerDestroyed(teamId, lane, towerIndex)
+    if not MOBA.Objectives or not MOBA.Objectives[teamId] then return end
+    if lane and towerIndex and MOBA.Objectives[teamId].towers[lane] then
+        MOBA.Objectives[teamId].towers[lane][towerIndex] = false
+    end
 end
 
 function MOBA.getTowersDestroyed(teamId, lane)
@@ -519,6 +529,14 @@ function MOBA.startMatch()
         }
     end
 
+    -- Marca início da partida para o auto-aprendizado / rubber band
+    if MOBA_BOTS then
+        MOBA_BOTS.MatchStartTime = os.time()
+        if MOBA_BOTS.syncTowerState then
+            MOBA_BOTS.syncTowerState()
+        end
+    end
+
     for _, team in pairs({MOBA.TEAMS.LEFT, MOBA.TEAMS.RIGHT}) do
         MOBA.LaneState[team.id] = {}
         for _, lane in ipairs(MOBA.LANES) do
@@ -535,7 +553,7 @@ function MOBA.startMatch()
             MOBA.MinionState[cid] = {
                 teamId = team.id, isStructure = true, isNexus = isNexus or false,
                 enemySkull = team.enemy_skull, lane = lane, towerIndex = towerIndex,
-                config = {range = 4, minDmg = 50, maxDmg = 80, attackSpeed = 1500, type = "ranged", distEffect = CONST_ANI_ENERGY}
+                config = {range = 4, minDmg = 60, maxDmg = 95, attackSpeed = 1500, type = "ranged", distEffect = CONST_ANI_ENERGY}
             }
             m:registerEvent(isNexus and "MobaNexusDeath" or "MobaTowerDeath")
             m:registerEvent("MobaHealthChange")
@@ -577,6 +595,32 @@ function MOBA.endMatch()
     if not MOBA.matchActive then return end
     MOBA.matchActive = false
 
+    -- ============================================================
+    -- AUTO-APRENDIZADO: registra o resultado da partida
+    -- (vencedor = time cujo NEXUS do oponente foi destruído)
+    -- ============================================================
+    if MOBA_BOTS and MOBA_BOTS.Learning and MOBA_BOTS.Learning.recordMatch then
+        local winnerTeam = nil
+        for teamId = 1, 2 do
+            if MOBA.Objectives and MOBA.Objectives[teamId] and MOBA.Objectives[teamId].nexus == false then
+                winnerTeam = (teamId == 1) and 2 or 1
+            end
+        end
+        if winnerTeam then
+            local duration = math.max(0, os.time() - (MOBA_BOTS.MatchStartTime or os.time()))
+            local comp1 = {}
+            local comp2 = {}
+            for cid, d in pairs(MOBA_BOTS.Data or {}) do
+                local c = Creature(cid)
+                if c and c:getHealth() > 0 then
+                    local comp = d.teamId == 1 and comp1 or comp2
+                    comp[d.class] = (comp[d.class] or 0) + 1
+                end
+            end
+            MOBA_BOTS.Learning:recordMatch(winnerTeam, duration, comp1, comp2)
+        end
+    end
+
     for _, cid in ipairs(MOBA.spawnedStructures) do
         local c = Creature(cid)
         if c then c:remove() end
@@ -617,5 +661,12 @@ function MOBA.endMatch()
     MOBA.LaneState = {}
     MOBA.spawnedStructures = {}
     MOBA.botsSpawned = {[1] = false, [2] = false}
+
+    if MOBA_BOTS then
+        MOBA_BOTS.MatchStartTime = 0
+        MOBA_BOTS.TeamFocus = {[1] = nil, [2] = nil}
+        MOBA_BOTS.LastTeamFocusTime = {[1] = 0, [2] = 0}
+        MOBA_BOTS.Debuffs = {}
+    end
 end
 
